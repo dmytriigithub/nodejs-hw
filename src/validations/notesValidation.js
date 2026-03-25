@@ -8,7 +8,7 @@ export const getAllNotesSchema = {
     page: Joi.number().integer().min(1).default(1),
     perPage: Joi.number().integer().min(5).max(20).default(10),
     tag: Joi.string().valid(...TAGS).optional(),
-    search: Joi.string().allow(''),
+    search: Joi.string().allow('').optional(),
   })
 };
 
@@ -48,7 +48,7 @@ export const updateNoteSchema = {
     noteId: Joi.string().custom(objectIdValidator).required(),
   }),
   [Segments.BODY]: Joi.object({
-    title: Joi.string().min(3).max(30),
+    title: Joi.string().min(1),
     content: Joi.string().allow('').optional(),
     tag: Joi.string().valid(...TAGS).optional(),
   }).min(1), // важливо: не дозволяємо порожнє тіло

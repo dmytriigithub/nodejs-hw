@@ -81,7 +81,7 @@ export const updateNote = async (req, res) => {
   const note = await Note.findOneAndUpdate(
     { _id: noteId }, // Шукаємо по id
     req.body,
-    { new: true }, // повертаємо оновлений документ
+    { returnDocument: 'after' }, // повертаємо оновлений документ
   );
 
   if (!note) {
